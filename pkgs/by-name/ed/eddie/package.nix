@@ -3,6 +3,7 @@
   buildDotnetModule,
   fetchFromGitHub,
   dotnetCorePackages,
+  cacert,
 
   gcc,
   makeWrapper,
@@ -113,6 +114,8 @@ buildDotnetModule (finalAttrs: {
     chmod +x $out/lib/eddie-ui/App.Forms.Linux.exe
 
     cp -r resources/* $out/share/eddie-ui
+    rm $out/share/eddie-ui/cacert.pem
+    ln -s ${cacert}/etc/ssl/certs/ca-bundle.crt $out/share/eddie-ui/cacert.pem
     cp -r repository/linux_arch/bundle/eddie-ui/usr/share/{applications,pixmaps,polkit-1} $out/share
 
     substituteInPlace \
